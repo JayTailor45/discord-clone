@@ -5,7 +5,6 @@ const f = createUploadthing();
 
 const handleAuth = async() => {
   const { userId } = await auth();
-  console.log("userId - ", userId);
   if (!userId) throw new Error("Unauthorized");
   return { userId };
 };
