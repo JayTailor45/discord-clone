@@ -13,7 +13,7 @@ interface FileUploadProps {
 }
 
 export const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
-  const fileType = value?.split(".")[0];
+  const fileType = value?.split(".")?.pop();
 
   if (value && fileType !== "pdf") {
     return (
