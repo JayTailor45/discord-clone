@@ -1,7 +1,6 @@
 "use client";
 
 import { MemberRole, Server } from "@/lib/generated/prisma";
-import { ServerWithMembersWithProfiles } from "@/types";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -64,7 +63,9 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
           </DropdownMenuItem>
         )}
         {isModerator && (
-          <DropdownMenuItem className="dark:text-neutral-200 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem className="dark:text-neutral-200 px-3 py-2 text-sm cursor-pointer"
+            onClick={() => onOpen("createChannel")}
+          >
             Create Channel
             <PlusCircle className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
