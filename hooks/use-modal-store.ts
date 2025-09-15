@@ -1,4 +1,4 @@
-import { Server } from "@/lib/generated/prisma";
+import { ChannelType, Server } from "@/lib/generated/prisma";
 import { create } from "zustand";
 
 export type ModalType =
@@ -20,6 +20,7 @@ interface ModalStore {
 
 export interface ModalData {
   server?: Server;
+  channelType?: ChannelType;
 }
 
 export const useModal = create<ModalStore>((set) => ({

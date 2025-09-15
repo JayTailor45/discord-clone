@@ -32,6 +32,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import queryString from "query-string";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   name: z
@@ -44,8 +45,9 @@ const formSchema = z.object({
 });
 
 const CreateChannelModal = () => {
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const isModalOpen = isOpen && type === "createChannel";
+  const { channelType } = data;
   const params = useParams();
   const router = useRouter();
   const form = useForm({
@@ -55,6 +57,14 @@ const CreateChannelModal = () => {
       type: ChannelType.TEXT,
     },
   });
+
+  useEffect(() => {
+    if (channelType) {
+      form.setValue("type", channelType);
+    } else {
+      form.setValue("type", ChannelType.TEXT);
+    }
+  }, [channelType, form]);
 
   const isLoading = form.formState.isSubmitting;
 
