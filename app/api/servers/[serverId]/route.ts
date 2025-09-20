@@ -6,7 +6,7 @@ export async function PATCH(
   req: Request,
   { params }: { params: { serverId: string } }
 ) {
-  const { serverId } = params;
+  const { serverId } = await params;
   const { name, imageUrl } = await req.json();
 
   try {
@@ -35,7 +35,7 @@ export async function DELETE(
   req: Request,
   { params }: { params: { serverId: string } }
 ) {
-  const { serverId } = params;
+  const { serverId } = await params;
 
   try {
     const profile = await currentProfile();
