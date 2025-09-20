@@ -1,12 +1,40 @@
-const ServerIdPage = () => {
-  return (
-    <>
-      <div className="p-4">
-        <h1 className="text-2xl font-bold">Server ID Page</h1>
-        <p className="mt-2 text-gray-600"></p>
-      </div>
-    </>
-  );
+import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
+
+interface ServerIdPageProps {
+  params: { serverId: string };
+}
+const ServerIdPage = async ({ params }: ServerIdPageProps) => {
+  const { serverId } = params;
+  const profile = await currentProfile();
+
+  if (!profile) {
+    return redirect("/login");
+  }
+
+  const server = await db.server.findUnique({
+    where: { id: serverId, members: { some: { profileId: profile.id } } },
+    include: {
+      channels: {
+        where: {
+          name: "general",
+        },
+
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
+    },
+  });
+
+  const initialChannel = server?.channels[0];
+
+  if (initialChannel?.name !== "general") {
+    return null;
+  }
+
+  return redirect(`/servers/${serverId}/channels/${initialChannel?.id}`);
 };
 
 export default ServerIdPage;
