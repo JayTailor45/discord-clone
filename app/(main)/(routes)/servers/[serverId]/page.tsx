@@ -5,8 +5,9 @@ import { redirect } from "next/navigation";
 interface ServerIdPageProps {
   params: { serverId: string };
 }
+
 const ServerIdPage = async ({ params }: ServerIdPageProps) => {
-  const { serverId } = params;
+  const { serverId } = await params;
   const profile = await currentProfile();
 
   if (!profile) {
