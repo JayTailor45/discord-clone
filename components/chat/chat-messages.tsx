@@ -9,6 +9,7 @@ import { format } from "date-fns";
 import React, { ElementRef, useRef } from "react";
 import { useChatSocket } from "@/hooks/use-chat-socket";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
+import "react-photo-view/dist/react-photo-view.css";
 
 type MessageWithMemberWithProfile = Message & {
   member: Member & {

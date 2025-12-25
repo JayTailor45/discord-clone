@@ -16,6 +16,7 @@ import Image from "next/image";
 import qs from "query-string";
 import z from "zod";
 import axios from "axios";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 interface ChatItemProps {
   id: string;
@@ -146,19 +147,18 @@ export const ChatItem = ({
             </span>
           </div>
           {isImage && (
-            <a
-              href={fileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48"
-            >
-              <Image
-                src={fileUrl}
-                alt={content}
-                fill
-                className="object-cover"
-              />
-            </a>
+            <div className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48">
+              <PhotoProvider>
+                <PhotoView src={fileUrl}>
+                  <Image
+                    src={fileUrl}
+                    alt={content}
+                    fill
+                    className="object-cover"
+                  />
+                </PhotoView>
+              </PhotoProvider>
+            </div>
           )}
           {isPdf && (
             <div className="mt-2">
