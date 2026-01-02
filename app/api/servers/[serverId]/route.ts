@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { serverId: string } }
+  { params }: { params: Promise<{ serverId: string }> }
 ) {
   const { serverId } = await params;
   const { name, imageUrl } = await req.json();
@@ -33,7 +33,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { serverId: string } }
+  { params }: { params: Promise<{ serverId: string }> }
 ) {
   const { serverId } = await params;
 
@@ -53,7 +53,7 @@ export async function DELETE(
 
     return NextResponse.json(server);
   } catch (error) {
-    console.error('[SERVER_ID_DELETE]', error);
+    console.error("[SERVER_ID_DELETE]", error);
     return NextResponse.error();
   }
 }

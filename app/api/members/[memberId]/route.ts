@@ -4,13 +4,13 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { memberId: string } }
+  { params }: { params: Promise<{ memberId: string }> }
 ) {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
     const serverId = searchParams.get("serverId");
-    const memberId = params.memberId;
+    const { memberId } = await params;
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -20,7 +20,7 @@ export async function DELETE(
       return new NextResponse("Server ID missing", { status: 400 });
     }
 
-    if (!params?.memberId) {
+    if (!memberId) {
       return new NextResponse("Member ID missing", { status: 400 });
     }
 
@@ -56,14 +56,14 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { memberId: string } }
+  { params }: { params: Promise<{ memberId: string }> }
 ) {
   try {
     const profile = await currentProfile();
     const { searchParams } = new URL(req.url);
     const { role } = await req.json();
     const serverId = await searchParams.get("serverId");
-    const memberId = params.memberId;
+    const { memberId } = await params;
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -73,7 +73,7 @@ export async function PATCH(
       return new NextResponse("Server ID missing", { status: 400 });
     }
 
-    if (!params?.memberId) {
+    if (!memberId) {
       return new NextResponse("Member ID missing", { status: 400 });
     }
 

@@ -8,10 +8,10 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 interface MemberIdPageProps {
-  params: {
+  params: Promise<{
     memberId: string;
     serverId: string;
-  };
+  }>;
 }
 
 const MemberIdPage = async ({ params }: MemberIdPageProps) => {

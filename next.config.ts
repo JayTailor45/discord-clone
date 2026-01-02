@@ -2,7 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["uploadthing.com", "qsbuqi3ye5.ufs.sh"],
+    remotePatterns: [
+      { protocol: "https", hostname: "uploadthing.com" },
+      { protocol: "https", hostname: "qsbuqi3ye5.ufs.sh" },
+    ],
   },
 };
 

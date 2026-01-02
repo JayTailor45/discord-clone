@@ -6,7 +6,7 @@ import { useChatQuery } from "@/hooks/use-chat-query";
 import { Loader2, ServerCrash } from "lucide-react";
 import { ChatItem } from "./chat-item";
 import { format } from "date-fns";
-import React, { ElementRef, useRef } from "react";
+import React, { useRef } from "react";
 import { useChatSocket } from "@/hooks/use-chat-socket";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
 import "react-photo-view/dist/react-photo-view.css";
@@ -46,8 +46,8 @@ export const ChatMessages = ({
   const addKey = `chat:${chatId}:messages`;
   const updateKey = `chat:${chatId}:messages:update`;
 
-  const chatRef = useRef<ElementRef<"div">>(null);
-  const bottomRef = useRef<ElementRef<"div">>(null);
+  const chatRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const {
     data,

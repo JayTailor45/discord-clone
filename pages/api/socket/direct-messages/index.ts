@@ -86,6 +86,7 @@ export default async function handler(
     });
 
     const channelKey = `chat:${conversationId}:messages`;
+    //@ts-ignore
     res?.socket?.server?.io?.emit(channelKey, message);
 
     return res.status(200).json({ message });

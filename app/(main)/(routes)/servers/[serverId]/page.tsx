@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
 interface ServerIdPageProps {
-  params: { serverId: string };
+  params: Promise<{ serverId: string }>;
 }
 
 const ServerIdPage = async ({ params }: ServerIdPageProps) => {

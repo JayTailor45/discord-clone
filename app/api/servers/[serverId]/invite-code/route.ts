@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { serverId: string } }
+  { params }: { params: Promise<{ serverId: string }> }
 ) {
   try {
     const { serverId } = await params;
@@ -18,9 +18,7 @@ export async function PATCH(
     }
 
     const server = await db.server.update({
-      where: { id: serverId,
-        profileId: profile.id,
-       },
+      where: { id: serverId, profileId: profile.id },
       data: { inviteCode: uuidv4() },
     });
     return NextResponse.json(server);

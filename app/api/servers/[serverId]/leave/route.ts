@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { serverId: string } }
+  { params }: { params: Promise<{ serverId: string }> }
 ) {
   const { serverId } = await params;
 
@@ -20,7 +20,7 @@ export async function PATCH(
 
     const server = await db.server.update({
       where: {
-        id: params.serverId,
+        id: serverId,
         profileId: {
           not: profile.id,
         },
