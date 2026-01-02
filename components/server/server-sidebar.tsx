@@ -9,7 +9,6 @@ import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { ServerSection } from "./server-section";
 import { ServerChannel } from "./server-channel";
-import { channel } from "diagnostics_channel";
 import { ServerMember } from "./server-member";
 
 interface ServerSidebarProps {
